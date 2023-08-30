@@ -1,6 +1,6 @@
-// Existing Storage Account
 param storageAccountName string
 
+// Existing Storage Account
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: storageAccountName
   location: resourceGroup().location
@@ -39,11 +39,9 @@ resource greenStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-// ... Existing code
-
 // CDN Profile
 resource cdnProfile 'Microsoft.Cdn/profiles@2020-09-01' = {
-  name: 'azure-static-web-cdn'
+  name: 'yourCdnProfileName'
   location: 'global'
   sku: {
     name: 'Standard_Akamai'
@@ -91,4 +89,3 @@ resource greenCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
     greenStorageAccount
   ]
 }
-
