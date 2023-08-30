@@ -11,3 +11,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
     supportsHttpsTrafficOnly: true
   }
 }
+
+resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2019-06-01' = {
+  name: '${storageAccountName}/default'
+  properties: {
+    isLastAccessTimeTrackingEnabled: true
+  }
+}
