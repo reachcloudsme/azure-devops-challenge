@@ -38,3 +38,57 @@ resource greenStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
     supportsHttpsTrafficOnly: true
   }
 }
+
+// ... Existing code
+
+// CDN Profile
+resource cdnProfile 'Microsoft.Cdn/profiles@2020-09-01' = {
+  name: 'azure-static-web-cdn'
+  location: 'global'
+  sku: {
+    name: 'Standard_Akamai'
+  }
+}
+
+// CDN Endpoint for Blue
+resource blueCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
+  name: 'yourCdnProfileName/blueEndpoint'
+  location: 'global'
+  properties: {
+    originHostHeader: '${storageAccountName}blue.blob.core.windows.net'
+    origins: [
+      {
+        name: 'blue-origin'
+        properties: {
+          hostName: '${storageAccountName}blue.blob.core.windows.net'
+        }
+      }
+    ]
+  }
+  dependsOn: [
+    cdnProfile
+    blueStorageAccount
+  ]
+}
+
+// CDN Endpoint for Green
+resource greenCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
+  name: 'yourCdnProfileName/greenEndpoint'
+  location: 'global'
+  properties: {
+    originHostHeader: '${storageAccountName}green.blob.core.windows.net'
+    origins: [
+      {
+        name: 'green-origin'
+        properties: {
+          hostName: '${storageAccountName}green.blob.core.windows.net'
+        }
+      }
+    ]
+  }
+  dependsOn: [
+    cdnProfile
+    greenStorageAccount
+  ]
+}
+
