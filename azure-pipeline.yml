@@ -5,10 +5,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  azureSubscription: 'Your-Azure-Subscription-Name'
-  resourceGroupName: 'yourResourceGroupName'
-  storageAccountName: 'yourStorageAccountName'
-  cdnProfileName: 'yourCdnProfileName'
+  azureSubscription: 'Azure subscription 1'
+  resourceGroupName: 'azure-devops-rg'
+  storageAccountName: 'azuredevopsneerajsa'
+  cdnProfileName: 'azure-devops-cdn'
 
 stages:
 - stage: 'DeployInfrastructure'
