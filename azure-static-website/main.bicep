@@ -41,7 +41,7 @@ resource greenStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 
 // CDN Profile
 resource cdnProfile 'Microsoft.Cdn/profiles@2020-09-01' = {
-  name: 'yourCdnProfileName'
+  name: 'azure-devops-cdn'
   location: 'global'
   sku: {
     name: 'Standard_Akamai'
@@ -50,7 +50,7 @@ resource cdnProfile 'Microsoft.Cdn/profiles@2020-09-01' = {
 
 // CDN Endpoint for Blue
 resource blueCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
-  name: 'yourCdnProfileName/blueEndpoint'
+  name: 'azure-devops-cdn/blueEndpoint'
   location: 'global'
   properties: {
     originHostHeader: '${storageAccountName}blue.blob.core.windows.net'
@@ -71,7 +71,7 @@ resource blueCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
 
 // CDN Endpoint for Green
 resource greenCdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
-  name: 'yourCdnProfileName/greenEndpoint'
+  name: 'azure-devops-cdn/greenEndpoint'
   location: 'global'
   properties: {
     originHostHeader: '${storageAccountName}green.blob.core.windows.net'
