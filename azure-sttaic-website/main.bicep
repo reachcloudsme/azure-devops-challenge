@@ -1,3 +1,4 @@
+// Existing Storage Account
 param storageAccountName string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
@@ -12,9 +13,28 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   }
 }
 
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2019-06-01' = {
-  name: '${storageAccountName}/default'
+// Blue Storage Account
+resource blueStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+  name: '${storageAccountName}blue'
+  location: resourceGroup().location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
   properties: {
-    isLastAccessTimeTrackingEnabled: true
+    supportsHttpsTrafficOnly: true
+  }
+}
+
+// Green Storage Account
+resource greenStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
+  name: '${storageAccountName}green'
+  location: resourceGroup().location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    supportsHttpsTrafficOnly: true
   }
 }
